@@ -652,8 +652,8 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                 batch_y_mark = batch_y_mark.float().to(self.device)
                 if self.Doc2Vec==False:
                     prompt = [f"<|start_prompt|Make predictions about the future based on the following information: {text_info}<|<end_prompt>|>" for text_info in batch_text]
-
-                    prompt = self.tokenizer(prompt, return_tensors="pt", padding=True, truncation=True, max_length=1024).input_ids
+                    max_len = 512 if self.args.llm_model == 'BERT' else 1024
+                    prompt = self.tokenizer(prompt, return_tensors="pt", padding=True, truncation=True, max_length=max_len).input_ids
                     prompt_embeddings = self.llm_model.get_input_embeddings()(prompt.to(self.device))  # (batch, prompt_token, dim)
                 else:
                     prompt = batch_text
