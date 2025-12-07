@@ -8,7 +8,7 @@ root_paths=("./data/Public_Health")
 data_paths=("US_FLURATIO_Week.csv") 
 pred_lengths=(12 24 36 48)
 seeds=(2021)
-use_fullmodel=0
+use_fullmodel=1
 length=${#root_paths[@]}
 for seed in "${seeds[@]}"
 do
